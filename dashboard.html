@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MEGA Tech Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark px-4">
+        <span class="navbar-brand">MEGA Technologies</span>
+        <div>
+            {% if role == 'admin' %}
+            <a href="/admin/manage" class="btn btn-warning btn-sm me-2">Admin Panel</a>
+            {% endif %}
+            <a href="/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="card p-4 shadow-sm border-0" style="border-top: 5px solid #00c2cb !important;">
+                    <h5 class="text-muted">User: {{ username }}</h5>
+                    <h1 style="color: #00c2cb; font-size: 80px;">{{ count }}</h1>
+                    <p>Total IPs Uploaded</p>
+                    <a href="/upload_page" class="btn text-white w-100" style="background-color: #00c2cb;">Upload New IP</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card p-4 shadow-sm border-0">
+                    <h5>Recent History</h5>
+                    <table class="table mt-3">
+                        <thead class="table-light"><tr><th>IP</th><th>Type</th><th>Time</th></tr></thead>
+                        <tbody>
+                            {% for row in history %}
+                            <tr><td class="fw-bold">{{row[0]}}</td><td>{{row[1]}}</td><td class="text-muted">{{row[2].strftime('%H:%M')}}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
